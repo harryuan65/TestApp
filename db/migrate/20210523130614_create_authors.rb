@@ -7,7 +7,7 @@ class CreateAuthors < ActiveRecord::Migration[6.1]
       t.string :email, null: false
       t.string :password_hash, null: false
       t.string :name, null: false
-      t.string :picture
+      t.string :picture_url
       t.integer :role, null: false, default: 0
       t.index :email, unique: true
       t.timestamps

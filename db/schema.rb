@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2021_05_23_133719) do
     t.string "email", null: false
     t.string "password_hash", null: false
     t.string "name", null: false
-    t.string "picture"
+    t.string "picture_url"
     t.integer "role", default: 0, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
