@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class PostsController < ApiController
+    class PostsController < BaseController
       def index
         limit = params[:limit] || 50
         offset = params[:offset] || 0
