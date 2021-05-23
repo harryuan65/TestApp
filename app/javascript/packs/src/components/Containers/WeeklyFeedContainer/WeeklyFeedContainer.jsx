@@ -1,5 +1,5 @@
 import React from 'react'
-import WeeklyBlock from './WeeklyContainer/WeeklyBlock';
+import WeeklyBlock from './WeeklyBlock/WeeklyBlock';
 import classes from './WeeklyFeedContainer.module.scss';
 const WeeklyFeedContainer = () => {
   const defaultFeedTopics = ['ruby', 'golang'];
