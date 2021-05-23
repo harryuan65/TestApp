@@ -1,3 +1,13 @@
+# frozen_string_literal: true
+
+# rubocop:disable Style/Lambda
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  namespace :api do
+    namespace :v1 do
+      resources :posts, format: :json
+    end
+  end
+  root 'application#index'
+  get '/*path', constraints: lambda { |req| req.format == :html }, to: 'application#index'
 end
+# rubocop:enable Style/Lambda

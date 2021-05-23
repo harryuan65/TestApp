@@ -1,0 +1,44 @@
+@import '../../../assets/shared/Common.scss';
+
+.Header{
+  display: flex;
+  justify-content: space-between;
+  background-color: $background-main;
+  width: 100vw;
+  height: 90px;
+  padding: 15px;
+}
+.Header img{
+  max-height: 60px;
+}
+.Header ul{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.Header li {
+  margin-right: 1em;
+}
+.Header a {
+  font-size: 18px;
+}
+.Header .SignIn{
+  & a {
+    color: white;
+  }
+}
+
+.Header .SignUp{
+  padding: 8px 10px 9px 10px;
+  background-color: #ffc300;
+  border-radius: 3px;
+  & a {
+    color: $background-main;
+  }
+  & a:hover {
+    text-decoration: none;
+  }
+}

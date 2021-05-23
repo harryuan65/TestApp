@@ -1,0 +1,5 @@
+@import '../Placeholder.module.scss';
+
+.SentencePlaceholder{
+  @include Placeholder();
+}

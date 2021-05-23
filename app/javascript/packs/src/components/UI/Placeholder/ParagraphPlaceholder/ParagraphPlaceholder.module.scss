@@ -1,0 +1,11 @@
+@import '../Placeholder.module.scss';
+
+.ParagraphGroup{
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  margin: 20px;
+}
+.Paragraph{
+  @include Placeholder();
+}

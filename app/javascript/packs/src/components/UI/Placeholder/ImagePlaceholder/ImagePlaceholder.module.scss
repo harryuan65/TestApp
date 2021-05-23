@@ -1,0 +1,6 @@
+@import '../Placeholder.module.scss';
+
+.ImagePlaceholder{
+  @include Placeholder();
+  margin: 20px;
+}

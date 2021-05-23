@@ -1,0 +1,11 @@
+@import '../../../../assets/shared/Common.scss';
+
+.PostItem{
+  @include PostTheme;
+  max-width: 90%;
+  padding: 10px 20px;
+}
+.Title{
+  @include PostTitle;
+  font-size: 24px;
+}

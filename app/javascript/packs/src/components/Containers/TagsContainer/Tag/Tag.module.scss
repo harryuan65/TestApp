@@ -1,0 +1,11 @@
+.selectedTopic{
+  color: #2e2e2e;
+  font-weight: normal;
+}
+.selectedTopic:hover{
+  text-decoration: underline;
+  cursor: pointer;
+}
+.selectedTopic.selected{
+  font-weight: bold;
+}

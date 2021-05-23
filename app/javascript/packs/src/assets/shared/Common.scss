@@ -1,0 +1,19 @@
+// $background-main: #222831;
+$background-main: #1E212D;
+$color-aux: #eee;
+// $accent: #FFC300;
+@mixin flex($fd, $jc, $ai) {
+  display: flex;
+  flex-direction: $fd;
+  justify-content: $jc;
+  align-items: $ai;
+}
+@mixin PostTheme{
+  border: 1px solid #C6C9D2;
+  border-radius: 10px;
+  background-color: white;
+}
+@mixin PostTitle{
+  font-weight: bolder;
+  color: #4e4e4e;
+}
