@@ -28,16 +28,20 @@ const PostShowContainer = ({ postId }) => {
   }, [postId]);
 
   let image = null;
-  if (!loading && post && post.featuredImageUrl) {
-    image = <img src={post.featuredImageUrl} alt="featuredImage" />;
-  } else if (!loading && post && post.useDefaultFeaturedImage) {
-    try {
-      console.log(`../../../assets/images/post/${post.useDefaultFeaturedImage}.png`)
-      const localImage = require(`../../../assets/images/post/${post.useDefaultFeaturedImage}.png`)
-        .default;
-      image = <img src={localImage} alt="featuredImage" />;
-    } catch (e) {
-      image = <img src={PlaceholderFeatured} alt="featuredImage" />;
+  let finishedLoading = !loading && post;
+  if (finishedLoading) {
+    if (post.featuredImageUrl){
+      image = <img src={post.featuredImageUrl} alt="featuredImage" />;
+    }
+    else if (post.useDefaultFeaturedImage) {
+      try {
+        console.log(`../../../assets/images/post/${post.useDefaultFeaturedImage}.png`)
+        const localImage = require(`../../../assets/images/post/${post.useDefaultFeaturedImage}.png`)
+          .default;
+        image = <img src={localImage} alt="featuredImage" />;
+      } catch (e) {
+        image = <img src={PlaceholderFeatured} alt="featuredImage" />;
+      }
     }
   } else {
     image = <img src={PlaceholderFeatured} alt="featuredImage" />;

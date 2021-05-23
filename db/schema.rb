@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_23_130614) do
+ActiveRecord::Schema.define(version: 2021_05_23_133719) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,4 +26,17 @@ ActiveRecord::Schema.define(version: 2021_05_23_130614) do
     t.index ["email"], name: "index_authors_on_email", unique: true
   end
 
+  create_table "posts", force: :cascade do |t|
+    t.string "title", null: false
+    t.bigint "author_id", null: false
+    t.string "tags", array: true
+    t.string "category", default: "general"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_id"], name: "index_posts_on_author_id"
+    t.index ["tags"], name: "index_posts_on_tags", using: :gin
+    t.index ["title"], name: "index_posts_on_title"
+  end
+
+  add_foreign_key "posts", "authors"
 end

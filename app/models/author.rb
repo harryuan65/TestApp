@@ -1,6 +1,7 @@
 class Author < ApplicationRecord
   include BCrypt
   enum role: %i[normal admin]
+  has_many :posts
 
   def password=(new_password)
     self.password_hash = Password.create(new_password)
