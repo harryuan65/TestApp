@@ -9,6 +9,7 @@ const PostListContainer = (props) => {
   const [currentTitle, setCurrentTitle] = useState('');
   const [currentPosts, setCurrentPosts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [responseError, setResponseError] = useState(null);
   const fetchPostsByTagName = async (tagName, url) => {
     setLoading(true);
 
@@ -20,10 +21,12 @@ const PostListContainer = (props) => {
     .then((response) => {
       const { posts } = response.data;
       setCurrentPosts(posts);
+      setResponseError(null);
       setLoading(false);
     })
     .catch((error)=>{
-      console.log(error);
+      setResponseError(error);
+      setLoading(false);
     })
   };
 
@@ -37,8 +40,10 @@ const PostListContainer = (props) => {
   let renderComponents = null;
   if (loading){
     renderComponents = "Loading"
+  } else if (responseError){
+    renderComponents = <h2>Oops! Something has went wrong.</h2>
   } else if(currentPosts && currentPosts.length === 0){
-    renderComponents = <h2>Oops ! Looks like there's nothing.</h2>
+    renderComponents = <h2>Well, Looks like there's nothing.</h2>
   } else if(currentPosts) {
     renderComponents = <PostsList posts={currentPosts} tagSelectHandler={props.tagSelectHandler}/>
   }
