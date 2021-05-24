@@ -3,9 +3,9 @@ import classes from "./Author.module.scss";
 import SentencePlaceholder from "../Placeholder/SentencePlaceholder/SentencePlaceholder";
 import AvatarPlaceholder from "../Placeholder/AvatarPlaceholder/AvatarPlaceholder";
 
-const Author = ({ loading, id, name, picture, createdAt }) => {
-  const avatar = ( loading || !picture ? <AvatarPlaceholder/> :
-    <img src={picture} alt={`${name}'s`} />
+const Author = ({ loading, id, name, pictureUrl, createdAt }) => {
+  const avatar = ( loading || !pictureUrl ? <AvatarPlaceholder/> :
+    <img src={pictureUrl} alt={`${name}'s`} />
   );
 
   const authorName = loading ?

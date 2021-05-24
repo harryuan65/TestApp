@@ -2,13 +2,10 @@
 
 module Api
   module V1
+    # posts api
     class PostsController < BaseController
       def index
-        limit = params[:limit] || 50
-        offset = params[:offset] || 0
-
-        @posts = Post.includes(:author).limit(limit).offset(offset)
-        render json: PostsSerializer.new(@posts).serializable_hash
+        @posts = PostService.get_posts(tag: params[:tag], limit: params[:limit], offset: params[:offset])
       end
     end
   end

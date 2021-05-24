@@ -3,13 +3,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PostDesc from "../../PostDesc/PostDesc";
 
-const PostItem = ({ id, title, author, tags, tagSelectHandler }) => {
+const PostItem = ({ id, title, author, createdAt, tags, tagSelectHandler }) => {
   return (
     <div className={classes.PostItem}>
       <Link className={classes.Title} to={(id && `/post/${id}`) || "#"}>
         {title}
       </Link>
-      <PostDesc author={author} tags={tags} tagSelectHandler={tagSelectHandler}/>
+      <PostDesc author={author} createdAt={createdAt} tags={tags} tagSelectHandler={tagSelectHandler}/>
     </div>
   );
 };

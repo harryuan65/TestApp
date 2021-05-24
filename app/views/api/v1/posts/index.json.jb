@@ -1,0 +1,16 @@
+{
+  posts: @posts.map do |post|
+    author = post.author
+    {
+      id: post.id,
+      title: post.title,
+      author: {
+        id: author.id,
+        name: author.name,
+        pictureUrl: author.picture_url
+      },
+      createdAt: post.created_at.strftime('%b %d'),
+      tags: post.tags
+    }
+  end
+}
