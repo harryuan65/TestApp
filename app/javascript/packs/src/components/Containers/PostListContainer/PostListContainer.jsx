@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import classes from "./PostListContainer.module.scss";
 import PostsList from "../../UI/PostsList/PostsList";
-import axios from 'axios';
+import axios from '../../../client/axios';
 
 const upCase = (str) => str[0].toUpperCase() + str.slice(1, str.length);
 
