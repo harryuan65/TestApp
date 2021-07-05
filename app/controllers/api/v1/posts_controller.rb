@@ -7,6 +7,10 @@ module Api
       def index
         @posts = PostService.get_posts(tag: params[:tag], limit: params[:limit], offset: params[:offset])
       end
+
+      def show
+        @post = PostService.get_post(id: params[:id])
+      end
     end
   end
 end

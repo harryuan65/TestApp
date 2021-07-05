@@ -10,6 +10,10 @@ module Api
           posts = posts.where("'#{tag}' = ANY (tags)") if tag.present? && tag != 'latest'
           posts
         end
+
+        def get_post(id:)
+          Post.includes(:author).find(id)
+        end
       end
     end
   end

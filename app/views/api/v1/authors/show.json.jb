@@ -1,0 +1,5 @@
+{
+  id: @author.id,
+  name: @author.name,
+  pictureUrl: @author.picture_url
+}

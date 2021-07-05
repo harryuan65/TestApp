@@ -1,0 +1,22 @@
+content = "
+<h1>你要出多少</h1>
+<pre>
+  func add(a int, b int) {
+    return a + b
+  }
+</pre>
+"
+
+author = @post.author
+{
+  id: @post.id,
+  title: @post.title,
+  author: {
+    id: author.id,
+    name: author.name,
+    pictureUrl: author.picture_url
+  },
+  content: content,
+  createdAt: @post.created_at.strftime('%b %d'),
+  tags: @post.tags
+}

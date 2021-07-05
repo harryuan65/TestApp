@@ -5,7 +5,7 @@
   grid-column: 1/3;
   margin-right: 45px;
   overflow: hidden;
-  max-width: 723px;
+  min-width: 54vw;
 }
 .Title{
   @include PostTitle;
