@@ -1,17 +1,13 @@
 @import '../../../assets/shared/Common.scss';
 
-.PostShowContainer{
-  @include PostTheme;
-  grid-column: 1/3;
-  margin-right: 45px;
-  overflow: hidden;
-  min-width: 54vw;
-}
 .Title{
   @include PostTitle;
 }
 .PostBlock{
   padding: 10px 20px;
 }
-.PostContent{
+.TitleWrap{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }

@@ -1,0 +1,12 @@
+input.EditTitle {
+  font-size: 34px;
+  border: none;
+  color: #7e7e7e;
+  font-weight: bold;
+  outline: none;
+  transition: cubic-bezier(0.23, 1, 0.320, 1) .3s;
+  &:focus{
+    color: #3b3b3b;
+    transition: cubic-bezier(0.23, 1, 0.320, 1) .3s;
+  }
+}

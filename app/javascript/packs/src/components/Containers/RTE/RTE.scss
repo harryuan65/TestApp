@@ -1,0 +1,44 @@
+.trix-wrap {
+  margin-top: 30px;
+}
+trix-editor {
+  pre{
+    background-color: #ceeaea;
+    padding: 16px;
+    font-size: 14px;
+  }
+  section {
+    background-color: #ddd;
+    margin: 0;
+    padding: 1rem;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    color: #3b3b3b;
+  }
+}
+
+trix-toolbar {
+  [data-trix-attribute="red"]{
+    text-indent: -4px;
+    color: red;
+    &[data-trix-active]{
+      color: red;
+    }
+  }
+
+  [data-trix-attribute="section"]{
+    text-indent: -3px;
+    // color: red;
+  }
+  .trix-button--icon-heading-1::before {
+    background: none;
+    content: 'H1';
+    line-height: 26px;
+    font-size: 18px;
+    text-indent: 0px;
+  }
+  .trix-button--icon.trix-button--icon-heading-1:disabled::before {
+    opacity: 1;
+    color: rgba(0, 0, 0, 0.5)
+  }
+}

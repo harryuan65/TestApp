@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 import classes from "./PostShowContainer.module.scss";
 import PlaceholderFeatured from "../../../assets/images/post/PlaceholderFeatured.png";
 import ParagraphPlaceholder from "../../UI/Placeholder/ParagraphPlaceholder/ParagraphPlaceholder";
 import ImagePlaceholder from "../../UI/Placeholder/ImagePlaceholder/ImagePlaceholder";
-import axios from "axios";
+import axios from "../../../client/axios";
 import PostDesc from "../../UI/PostDesc/PostDesc";
+import PostContainer from "../PostContainer/PostContainer";
 
 const PostShowContainer = ({ postId }) => {
   const history = useHistory();
@@ -77,26 +79,25 @@ const PostShowContainer = ({ postId }) => {
   );
 
   let renderTitle = (!loading && post.title) || "Loading...";
-  let renderPostDesc = (
+  let renderPostDesc = !loading && post ? (
     <PostDesc
-      author={!loading && post.author}
-      createdAt={!loading && post.createdAt}
-      tags={(!loading && post.tags) || []}
-      tagSelectHandler={(!loading && goToTagsPage) || (() => {})}
+      author={post.author}
+      createdAt={post.createdAt}
+      tags={(post.tags) || []}
+      tagSelectHandler={(goToTagsPage) || (() => {})}
     />
-  );
-  let renderContent = contentPlaceholder;
-
+  ) : null;
   if(responseError) {
     return (
-      <div className={classes.PostShowContainer}>
+      <PostContainer>
         <div className={classes.PostBlock}>
           <h1>Oops! Something went wrong.</h1>
         </div>
-      </div>
+      </PostContainer>
     );
   }
 
+  let renderContent = contentPlaceholder;
   if (!loading && post.content) {
     renderContent = (
       <div
@@ -107,14 +108,17 @@ const PostShowContainer = ({ postId }) => {
   }
   // else renders placeholders
   return (
-    <div className={classes.PostShowContainer}>
+    <PostContainer>
       {image}
       <div className={classes.PostBlock}>
-        <h1 className={classes.Title}>{renderTitle}</h1>
+        <div className={classes.TitleWrap}>
+          <h1 className={classes.Title}>{renderTitle}</h1>
+          {(post ? <Link to={`/post/${postId}/edit`}>edit</Link> : null )}
+        </div>
         {renderPostDesc}
         {renderContent}
       </div>
-    </div>
+    </PostContainer>
   );
 
 };
