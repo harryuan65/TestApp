@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import classes from "./PostListContainer.module.scss";
 import PostsList from "../../UI/PostsList/PostsList";
-import axios from '../../../client/axios';
+import APIManager from "../../../utils/APIManager";
 
 const upCase = (str) => str[0].toUpperCase() + str.slice(1, str.length);
 
@@ -13,11 +13,12 @@ const PostListContainer = (props) => {
   const fetchPostsByTagName = async (tagName, url) => {
     setLoading(true);
 
-    let baseUrl = '/api/v1/posts.json';
+    let baseUrl = '/posts.json';
+    let data = {};
     if (tagName){
-      baseUrl += `?tag=${tagName}`
+      data = {tag: tagName}
     }
-    axios.get(baseUrl)
+    APIManager.Instance().get(baseUrl, data)
     .then((response) => {
       const { posts } = response.data;
       setCurrentPosts(posts);

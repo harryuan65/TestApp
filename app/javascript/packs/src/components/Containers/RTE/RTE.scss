@@ -2,6 +2,7 @@
   margin-top: 30px;
 }
 trix-editor {
+  margin-bottom: 30px;
   pre{
     background-color: #ceeaea;
     padding: 16px;
@@ -18,7 +19,7 @@ trix-editor {
 }
 
 trix-toolbar {
-  [data-trix-attribute="red"]{
+  .trix-button[data-trix-attribute="red"]{
     text-indent: -4px;
     color: red;
     &[data-trix-active]{
@@ -30,6 +31,9 @@ trix-toolbar {
     text-indent: -3px;
     // color: red;
   }
+  .trix-button--icon:not(:disabled)::before {
+    color: #222;
+  }
   .trix-button--icon-heading-1::before {
     background: none;
     content: 'H1';
@@ -37,8 +41,8 @@ trix-toolbar {
     font-size: 18px;
     text-indent: 0px;
   }
+  //
   .trix-button--icon.trix-button--icon-heading-1:disabled::before {
     opacity: 1;
-    color: rgba(0, 0, 0, 0.5)
   }
 }

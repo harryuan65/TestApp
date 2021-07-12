@@ -14,6 +14,14 @@ module Api
         def get_post(id:)
           Post.includes(:author).find(id)
         end
+
+        def update_post(id: , title: , content:)
+          post = Post.find(id)
+
+          post.title = title if title
+          post.content = content if content
+          post.save!
+        end
       end
     end
   end

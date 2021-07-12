@@ -11,6 +11,10 @@ module Api
       def show
         @post = PostService.get_post(id: params[:id])
       end
+
+      def update
+        PostService.update_post(id: params[:id], title: params[:title], content: params[:content])
+      end
     end
   end
 end
