@@ -73,7 +73,7 @@ const RTE = ({ content, onChange }) => {
     trixInput.current.addEventListener("trix-change", (event) => {
       onChange(event.target.innerHTML);
     });
-    window.Trix = trixInput.current;
+    // window.Trix = trixInput.current;
 
     setInitialized(true);
   };
@@ -150,8 +150,8 @@ const RTE = ({ content, onChange }) => {
     //     editor.activateAttribute('href', data);
     //   }
     // }
-    if (typeof content === "string" && trixInput.current) {
-      if (!initialized) initialize();
+    if (trixInput.current && !initialized) {
+      initialize();
       window.addEventListener("keydown", keydownHandler);
       // window.addEventListener('paste', pasteHandler);
     }
@@ -159,26 +159,12 @@ const RTE = ({ content, onChange }) => {
       window.removeEventListener("keydown", keydownHandler);
       // window.removeEventListener('paste', pasteHandler)
     };
-  }, [content, setInputQueue]);
+  }, [content, setInputQueue, trixInput]);
 
   return (
     <div>
       <input type="hidden" id="content" value={content || ""} />
       {typeof content == "string" ? editor : "Loading"}
-      <div>
-        {typeof content}
-        {`${trixInput.current}`}
-        {`${initialized}`}
-      </div>
-      {
-        <div>
-          <p>Listening queue: {inputQueue}</p>
-          <p>
-            Listening queue last: {inputQueue[inputQueue.length - 1]} ( null ?{" "}
-            {`${inputQueue[inputQueue.length - 1] === null}`})
-          </p>
-        </div>
-      }
     </div>
   );
 };

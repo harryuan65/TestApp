@@ -13,7 +13,9 @@ module Api
       end
 
       def update
-        PostService.update_post(id: params[:id], title: params[:title], content: params[:content])
+        @post = PostService.update_post(id: params[:id], title: params[:title], content: params[:content])
+        render 'show'
+        # render jb: @post
       end
     end
   end

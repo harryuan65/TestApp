@@ -17,3 +17,36 @@ $color-aux: #eee;
   font-weight: bolder;
   color: #4e4e4e;
 }
+@mixin RTEContent{
+  pre{
+    padding: 16px;
+    font-size: 14px;
+  }
+  section {
+    background-color: #ddd;
+    margin: 0;
+    padding: 1rem;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    color: #3b3b3b;
+  }
+}
+.btn {
+  background-color: #e7e7e7;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  min-width: 65px;
+  transition: .1s ease-out;
+  cursor: pointer;
+  &.primary:hover{
+    background-color: #569CD6;
+    color: white;
+    transition: .1s ease-out;
+  }
+  &.warning:hover{
+    background-color: #ce4b00;
+    color: white;
+    transition: .1s ease-out;
+  }
+}

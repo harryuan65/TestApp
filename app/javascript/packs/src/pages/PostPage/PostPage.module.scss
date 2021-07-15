@@ -5,19 +5,32 @@
 }
 .PostBlock{
   padding: 10px 20px;
+  position: relative;
+}
+.WrapResponseError {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px;
+  gap: 15px;
+  h1{
+    text-align: center;
+  }
 }
 .TitleWrap{
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-
+.PostContent{
+  @include RTEContent;
+}
 //post edit page
-div.EditTitle {
-  font-size: 34px;
-  border: none;
+.EditTitle {
+  // font-size: 34px;
   color: #7e7e7e;
-  font-weight: bold;
+  // font-weight: bold;
+  border: none;
   outline: none;
   transition: cubic-bezier(0.23, 1, 0.320, 1) .3s;
   &:focus{
@@ -26,16 +39,8 @@ div.EditTitle {
   }
 }
 button[type='submit'] {
-  position: absolute;
-  right: 10px;
-  bottom: 30px;
-  // background-image: linear-gradient(to bottom, #051937, #05224a, #052b5d, #073471, #0c3d86);
-  // background-image: linear-gradient(to bottom, #051937, #10223e, #192b46, #23344d, #2d3d54);
-  // background-image: linear-gradient(to top, #030b14, #13171c, #1d2025, #27292d, #323336);
-  // background-image: linear-gradient(to top, #090e14, #191c21, #272a2e, #35373c, #44464b);
-  // background-image: linear-gradient(to top, #252a32, #33373e, #42454a, #515356, #606163);
+  float: right;
   // background-color: #1E212D;
-  // background-image: linear-gradient(to top, #1e212d, #262833, #2e3039, #363740, #3e3f46);
   font-size: 18px;
   width: 87px;
   border: none;
@@ -45,5 +50,9 @@ button[type='submit'] {
   background-color: #ffc300;
   color: #2b2b2b;
   font-family: Helvetica;
-  border: #c2b99a 3px solid;
+  cursor: pointer;
+  margin-bottom: 20px;
+  &:hover{
+    background-color: #d3a200;
+  }
 }

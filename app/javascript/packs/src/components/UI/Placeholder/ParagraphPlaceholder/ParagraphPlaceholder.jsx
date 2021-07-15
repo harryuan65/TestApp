@@ -5,7 +5,7 @@ const ParagraphPlaceholder = ({ holders }) => (
   <div className={classes.ParagraphGroup}>
     {holders.map((e) => (
       <div
-        key={parseInt(Math.random()*100)}
+        key={parseInt(Math.random()*100000)}
         className={classes.Paragraph}
         style={{ width: e.width, height: e.height }}
       ></div>

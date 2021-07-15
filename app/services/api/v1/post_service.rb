@@ -21,6 +21,8 @@ module Api
           post.title = title if title
           post.content = content if content
           post.save!
+
+          post
         end
       end
     end
