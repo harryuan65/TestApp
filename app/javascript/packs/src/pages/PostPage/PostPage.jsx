@@ -1,14 +1,32 @@
+// import React from "react";
+// import PostShowContainer from "../components/Containers/PostShowContainer/PostShowContainer";
+// import WeeklyFeedContainer from "../components/Containers/WeeklyFeedContainer/WeeklyFeedContainer";
+// import Hoc from "../components/hoc";
+
+// const PostShowPage = ({ match }) => {
+//   const { postId } = match.params;
+//   return (
+//     <Hoc>
+//       <PostShowContainer postId={postId} />
+//       <WeeklyFeedContainer />
+//     </Hoc>
+//   );
+// };
+
+// export default PostShowPage;
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
-import classes from "./PostShowContainer.module.scss";
-import PostContentPlaceholder from "../PostPlaceholder/PostContentPlaceholder";
-import APIManager from "../../../utils/APIManager";
-import PostDesc from "../../UI/PostDesc/PostDesc";
-import PostContainer from "../PostContainer/PostContainer";
+import PostContainer from "../../components/Containers/PostContainer/PostContainer";
+import PostContentPlaceholder from "../../components/Containers/PostPlaceholder/PostContentPlaceholder";
+import WeeklyFeedContainer from "../../components/Containers/WeeklyFeedContainer/WeeklyFeedContainer";
+import APIManager from "../../utils/APIManager";
+import Hoc from "../../components/hoc";
+import PostDesc from "../../components/UI/PostDesc/PostDesc";
+import classes from './PostPage.module.scss';
 
-// moved to postpage
-const PostShowContainer = ({ postId }) => {
+const PostPage = ({ match }) => {
+  const { postId } = match.params;
   const history = useHistory();
   const goToTagsPage = (tag) => {
     history.push(`/tag/${tag}`);
@@ -82,27 +100,30 @@ const PostShowContainer = ({ postId }) => {
   );
 
   return (
-    <PostContainer>
-      {image}
-      <div className={classes.PostBlock}>
-        <div className={classes.TitleWrap}>
-          <h1 className={classes.Title}>
-            {(postReady && post.title) || "Loading..."}
-          </h1>
-          {postReady && <Link to={`/post/${postId}/edit`}>edit</Link>}
+    <Hoc>
+      <PostContainer>
+        {image}
+        <div className={classes.PostBlock}>
+          <div className={classes.TitleWrap}>
+            <h1 className={classes.Title}>
+              {(postReady && post.title) || "Loading..."}
+            </h1>
+            {postReady && <Link to={`/post/${postId}/edit`}>edit</Link>}
+          </div>
+          {postReady && (
+            <PostDesc
+              author={post.author}
+              createdAt={post.createdAt}
+              tags={post.tags || []}
+              tagSelectHandler={goToTagsPage || (() => {})}
+            />
+          )}
+          {renderContent}
         </div>
-        {postReady && (
-          <PostDesc
-            author={post.author}
-            createdAt={post.createdAt}
-            tags={post.tags || []}
-            tagSelectHandler={goToTagsPage || (() => {})}
-          />
-        )}
-        {renderContent}
-      </div>
-    </PostContainer>
+      </PostContainer>
+      <WeeklyFeedContainer/>
+    </Hoc>
   );
 };
 
-export default PostShowContainer;
+export default PostPage;
