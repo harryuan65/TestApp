@@ -1,4 +1,3 @@
-import PlaceholderFeatured from "../../../assets/images/post/PlaceholderFeatured.png";
 import ParagraphPlaceholder from "../../UI/Placeholder/ParagraphPlaceholder/ParagraphPlaceholder";
 import ImagePlaceholder from "../../UI/Placeholder/ImagePlaceholder/ImagePlaceholder";
 
@@ -6,20 +5,21 @@ import ImagePlaceholder from "../../UI/Placeholder/ImagePlaceholder/ImagePlaceho
 import React from 'react'
 
 const PostContentPlaceholder = () => {
+  let i = 0;
   return (
     <div>
       <ParagraphPlaceholder
         holders={[
-          { width: "90%", height: "15px" },
-          { width: "90%", height: "15px" },
-          { width: "25%", height: "15px" },
+          { width: "90%", height: "15px", animationDelay: `${(++i)*100}ms` },
+          { width: "90%", height: "15px", animationDelay: `${(++i)*100}ms` },
+          { width: "25%", height: "15px", animationDelay: `${(++i)*100}ms` },
         ]}
       />
-      <ImagePlaceholder width="90%" height="130px" />
+      <ImagePlaceholder width="90%" height="130px"  animationDelay={`${(++i)*100}ms`}/>
       <ParagraphPlaceholder
         holders={[
-          { width: "90%", height: "15px" },
-          { width: "25%", height: "15px" },
+          { width: "90%", height: "15px", animationDelay: `${(++i)*100}ms` },
+          { width: "25%", height: "15px", animationDelay: `${(++i)*100}ms` },
         ]}
       />
     </div>

@@ -121,7 +121,11 @@ const PostPage = ({ match }) => {
       <div className={classes.PostBlock}>
         <div className={classes.TitleWrap}>
           <h1 className={classes.Title}>
-            {(postReady && post.title) || "Loading..."}
+            {(postReady && post.title) || <Hoc>
+              <div className={classes.LoadingDot} style={{animationDelay: "0ms"  }}></div>
+              <div className={classes.LoadingDot} style={{animationDelay: "150ms"}}></div>
+              <div className={classes.LoadingDot} style={{animationDelay: "300ms"}}></div>
+            </Hoc>}
           </h1>
           {postReady && <button className={[classes.btn, classes.primary].join(' ')} onClick={() => toggleEditing()}>&#x270e; 編輯</button>}
         </div>
