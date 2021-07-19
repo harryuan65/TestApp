@@ -1,19 +1,3 @@
-// import React from "react";
-// import PostShowContainer from "../components/Containers/PostShowContainer/PostShowContainer";
-// import WeeklyFeedContainer from "../components/Containers/WeeklyFeedContainer/WeeklyFeedContainer";
-// import Hoc from "../components/hoc";
-
-// const PostShowPage = ({ match }) => {
-//   const { postId } = match.params;
-//   return (
-//     <Hoc>
-//       <PostShowContainer postId={postId} />
-//       <WeeklyFeedContainer />
-//     </Hoc>
-//   );
-// };
-
-// export default PostShowPage;
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router";
 import PostContainer from "../../components/Containers/PostContainer/PostContainer";
@@ -21,9 +5,8 @@ import PostContentPlaceholder from "../../components/Containers/PostPlaceholder/
 import WeeklyFeedContainer from "../../components/Containers/WeeklyFeedContainer/WeeklyFeedContainer";
 import APIManager from "../../utils/APIManager";
 import Hoc from "../../components/hoc";
-import PostDesc from "../../components/UI/PostDesc/PostDesc";
 import classes from "./PostPage.module.scss";
-import RTE from "../../components/Containers/RTE/RTE";
+import Editor from "../../components/Containers/Editor/Editor";
 import TagList from "../../components/UI/TagList/TagList";
 import MySadComputer from '../../assets/images/BrokenSad.png';
 
@@ -42,19 +25,19 @@ const PostPage = ({ match }) => {
   const [responseError, setResponseError] = useState(null);
   const fetchPost = async () => {
     setLoading(true);
-    // await new Promise((resolve) => {setTimeout(resolve, 10000)});
-    APIManager.Instance()
-      .get(`posts/${postId}.json`)
-      .then((response) => {
-        const post = response.data;
-        setPost(post);
-        setLoading(false);
-        setPostReady(true);
-      })
-      .catch((error) => {
-        setResponseError(error);
-        setLoading(false);
-      });
+    await new Promise((resolve) => {setTimeout(resolve, 30000)});
+    // APIManager.Instance()
+    //   .get(`posts/${postId}.json`)
+    //   .then((response) => {
+    //     const post = response.data;
+    //     setPost(post);
+    //     setLoading(false);
+    //     setPostReady(true);
+    //   })
+    //   .catch((error) => {
+    //     setResponseError(error);
+    //     setLoading(false);
+    //   });
   };
 
   useEffect(() => {
@@ -113,20 +96,21 @@ const PostPage = ({ match }) => {
     >
     <div className={classes.PostBlock}>
     <div className={classes.TitleWrap}>
-      <h1
-        contentEditable
+      <input
         className={[classes.Title, classes.EditTitle].join(' ')}
         onChange={handleTitleChange}
-        suppressContentEditableWarning
+        value={post.title}
       >
-        {post.title}
-      </h1>
+      </input>
       <button className={[classes.btn, classes.warning].join(' ')} onClick={ () => toggleEditing()}>&#x2715; 取消</button>
       </div>
-      <RTE content={post.content} onChange={handleContentChange} />
+      <Editor content={post.content} onChange={handleContentChange} />
       <button type="submit" onClick={savePost}>
         儲存
       </button>
+      <div>
+      <p>{post.title}</p>
+      </div>
     </div>
     </PostContainer>
   );
@@ -165,7 +149,6 @@ const PostPage = ({ match }) => {
   return (
     <Hoc>
       {editing ? editPostContainer : showPostContainer}
-      <WeeklyFeedContainer />
     </Hoc>
   );
 };

@@ -16,8 +16,15 @@ $color-aux: #eee;
 @mixin PostTitle{
   font-weight: bolder;
   color: #4e4e4e;
+  // force like h1
+  display: block;
+  font-size: 2em;
+  margin-block-start: 0.67em;
+  margin-block-end: 0.67em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
 }
-@mixin RTEContent{
+@mixin EditorContent{
   pre{
     padding: 16px;
     font-size: 14px;

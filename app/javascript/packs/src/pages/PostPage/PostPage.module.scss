@@ -23,7 +23,7 @@
   align-items: center;
 }
 .PostContent{
-  @include RTEContent;
+  @include EditorContent;
 }
 //post edit page
 .EditTitle {

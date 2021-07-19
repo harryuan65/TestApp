@@ -10,16 +10,16 @@ const PostContentPlaceholder = () => {
     <div>
       <ParagraphPlaceholder
         holders={[
-          { width: "470px", height: "15px" },
-          { width: "470px", height: "15px" },
-          { width: "220px", height: "15px" },
+          { width: "90%", height: "15px" },
+          { width: "90%", height: "15px" },
+          { width: "25%", height: "15px" },
         ]}
       />
-      <ImagePlaceholder width="470px" height="100px" />
+      <ImagePlaceholder width="90%" height="130px" />
       <ParagraphPlaceholder
         holders={[
-          { width: "470px", height: "15px" },
-          { width: "200px", height: "15px" },
+          { width: "90%", height: "15px" },
+          { width: "25%", height: "15px" },
         ]}
       />
     </div>

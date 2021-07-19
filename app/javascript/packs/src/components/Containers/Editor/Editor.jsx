@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import "trix/dist/trix.css";
-import "./RTE.scss";
+import "./Editor.scss";
 import * as Trix from "trix/dist/trix.js";
 
 const addCustomTextActions = (trix) => {
@@ -55,7 +55,7 @@ const addCustomHeadings = (trix) => {
     blockAttrGroup.insertBefore(heading, heading1.nextElementSibling);
   });
 };
-const RTE = ({ content, onChange }) => {
+const Editor = ({ content, onChange }) => {
   const trixInput = useRef(null);
   const [inputQueue, setInputQueue] = useState([]);
   const [initialized, setInitialized] = useState(false);
@@ -136,28 +136,11 @@ const RTE = ({ content, onChange }) => {
           [...inputQueue].slice(0, inputQueue.length - removeLength)
         );
       }
-
-      // console.log(inputQueue);
     };
-    // const pasteHandler = (event) => {
-    //   const data = (event.clipboardData || window.clipboardData).getData('text');
-    //   console.log(data);
-    //   if(data.match(/http:\/\/.+|https:\/\/.+/)) {
-    //     event.preventDefault();
-    //     const editor = trixInput.current.editor;
-    //     console.log(editor.getSelectedRange());
-    //     // editor.setSelectedRange(editor.getSelectedRange());
-    //     editor.activateAttribute('href', data);
-    //   }
-    // }
-    if (trixInput.current && !initialized) {
-      initialize();
-      window.addEventListener("keydown", keydownHandler);
-      // window.addEventListener('paste', pasteHandler);
-    }
+    initialize();
+    window.addEventListener("keydown", keydownHandler);
     return () => {
       window.removeEventListener("keydown", keydownHandler);
-      // window.removeEventListener('paste', pasteHandler)
     };
   }, [content, setInputQueue, trixInput]);
 
@@ -169,4 +152,4 @@ const RTE = ({ content, onChange }) => {
   );
 };
 
-export default RTE;
+export default Editor;
