@@ -71,3 +71,25 @@ $color-aux: #eee;
   animation: Pulsating 800ms infinite ease-in-out;
   margin: 5px 8px;
 }
+.CircularLoading{
+  background-color: #c99b05 !important;
+  transition: background-color .3s ease;
+}
+.CircularLoading::before {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 50%;
+  left: 50%;
+  border-width: 5px;
+  border-color: #d1d1d1 gray gray gray;
+  border-style: solid;
+  border-radius: 50%;
+  // transform: translate(-50%, -50%);
+  animation: rotate 1s infinite linear;
+}
+@keyframes rotate{
+  0% { transform: translate(-50%, -50%) rotate(0deg)}
+  100%{ transform: translate(-50%, -50%) rotate(360deg) }
+}

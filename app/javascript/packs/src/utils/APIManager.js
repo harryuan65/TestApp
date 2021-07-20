@@ -19,7 +19,7 @@ class APIManager {
     return APIManager.sharedInstance;
   }
   setCSRFToken(csrfToken) {
-    this.restClient.defaults.headers.common['X-CSRF-TOKEN'] = 'csrfToken';
+    this.restClient.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken;
     console.log(csrfToken);
   }
   async get(path, data) {

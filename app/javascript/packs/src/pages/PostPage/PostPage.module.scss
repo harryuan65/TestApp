@@ -39,6 +39,7 @@
   }
 }
 button[type='submit'] {
+  position: relative;
   float: right;
   // background-color: #1E212D;
   font-size: 18px;
@@ -54,5 +55,8 @@ button[type='submit'] {
   margin-bottom: 20px;
   &:hover{
     background-color: #d3a200;
+  }
+  &:disabled{
+    cursor: default;
   }
 }

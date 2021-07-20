@@ -10,7 +10,6 @@ import Editor from "../../components/Containers/Editor/Editor";
 import TagList from "../../components/UI/TagList/TagList";
 import MySadComputer from '../../assets/images/BrokenSad.png';
 
-
 const PostPage = ({ match }) => {
   const { postId } = match.params;
   const history = useHistory();
@@ -19,25 +18,22 @@ const PostPage = ({ match }) => {
   };
 
   const [post, setPost] = useState({});
-  const [loading, setLoading] = useState(false);
   const [editing, setEditing] = useState(false);
   const [postReady, setPostReady] = useState(false);
   const [responseError, setResponseError] = useState(null);
   const fetchPost = async () => {
-    setLoading(true);
-    await new Promise((resolve) => {setTimeout(resolve, 30000)});
-    // APIManager.Instance()
-    //   .get(`posts/${postId}.json`)
-    //   .then((response) => {
-    //     const post = response.data;
-    //     setPost(post);
-    //     setLoading(false);
-    //     setPostReady(true);
-    //   })
-    //   .catch((error) => {
-    //     setResponseError(error);
-    //     setLoading(false);
-    //   });
+    setPostReady(false);
+    // await new Promise((resolve) => {setTimeout(resolve, 30000)});
+    APIManager.Instance()
+      .get(`posts/${postId}.json`)
+      .then((response) => {
+        const post = response.data;
+        setPost(post);
+        setPostReady(true);
+      })
+      .catch((error) => {
+        setResponseError(error);
+      });
   };
 
   useEffect(() => {
@@ -60,20 +56,20 @@ const PostPage = ({ match }) => {
     setPost(updatedPost);
   };
 
-  const savePost = (event) => {
+  const savePost = async (event) => {
     event.preventDefault();
-    setLoading(true);
+    setPostReady(false);
+    // await new Promise((resolve) => {setTimeout(resolve, 30000)});
     APIManager.Instance()
       .put(`posts/${postId}`, post)
       .then((response) => {
         const post = response.data;
         setPost(post);
-        setLoading(false);
+        setPostReady(true);
         setEditing(false);
       })
       .catch((err) => {
         setResponseError(err);
-        setLoading(false);
       });
   };
 
@@ -85,6 +81,7 @@ const PostPage = ({ match }) => {
         <div className={[classes.PostBlock, classes.WrapResponseError].join(' ')}>
           <img src={MySadComputer} />
           <h1 className={classes.Title}>Oops! 好像有東西壞掉了，一定是哈利在玩耍導致的。</h1>
+          <p>{responseError.message}</p>
           <button className={[classes.btn, classes.primary].join(' ')} onClick={() => history.push('/') }>重新整理</button>
         </div>
       </PostContainer>
@@ -105,9 +102,7 @@ const PostPage = ({ match }) => {
       <button className={[classes.btn, classes.warning].join(' ')} onClick={ () => toggleEditing()}>&#x2715; 取消</button>
       </div>
       <Editor content={post.content} onChange={handleContentChange} />
-      <button type="submit" onClick={savePost}>
-        儲存
-      </button>
+      <button type="submit" onClick={savePost} disabled={!postReady && 'disabled'} className={ !postReady && classes.CircularLoading || '' }>{postReady ? "儲存" : '\u00A0'}</button>
       <div>
       <p>{post.title}</p>
       </div>
