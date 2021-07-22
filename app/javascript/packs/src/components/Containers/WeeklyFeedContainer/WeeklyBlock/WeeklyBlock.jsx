@@ -13,6 +13,7 @@ const WeeklyBlock = ({ feedTopic }) => {
     setLoading(true);
     // Mock fetching
     console.log("Sleeping");
+    // await new Promise((resolve) => setTimeout(resolve, 864000));
     await new Promise((resolve) => setTimeout(resolve, Math.random() * 800));
     console.log("Slept 2s");
     let posts = [];
@@ -38,7 +39,11 @@ const WeeklyBlock = ({ feedTopic }) => {
       <h3>{upCase(feedTopic)} Weekly<Link to={`/feed/${feedTopic}` }>view all</Link></h3>
       <ul className={classes.FeedPosts}>
         {loading
-          ? "Loading..."
+          ? <li style={{padding: '7px'}}>
+              <div className={classes.LoadingDot} style={{margin: '5px 6px', width: '5px', height: '5px', animationDelay: "0ms"  }}></div>
+              <div className={classes.LoadingDot} style={{margin: '5px 6px', width: '5px', height: '5px', animationDelay: "150ms"}}></div>
+              <div className={classes.LoadingDot} style={{margin: '5px 6px', width: '5px', height: '5px', animationDelay: "300ms"}}></div>
+            </li>
           : feedPosts.map((post) => (
               <li key={post} className={classes.FeedPost}>
                 <Link to={`/${post}`}>{post}</Link>

@@ -1,7 +1,5 @@
-// $background-main: #222831;
 $background-main: #1E212D;
 $color-aux: #eee;
-// $accent: #FFC300;
 @mixin flex($fd, $jc, $ai) {
   display: flex;
   flex-direction: $fd;
@@ -16,7 +14,6 @@ $color-aux: #eee;
 @mixin PostTitle{
   font-weight: bolder;
   color: #4e4e4e;
-  // force like h1
   display: block;
   font-size: 2em;
   margin-block-start: 0.67em;
