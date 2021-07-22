@@ -10,6 +10,15 @@ class APIManager {
     this.restClient = axios;
     this.restClient.defaults.headers.post['Accept'] = 'application/json';
     this.currentCSRFToken = document.querySelector('[name=csrf-token]').content;
+    this.restClient.interceptors.request.use((config) => {
+      config.headers.common['X-CSRF-TOKEN'] = this.currentCSRFToken;
+      return config;
+    })
+    this.restClient.interceptors.response.use((response) => {
+      const newCSRFToken = response.headers['x-csrf-token'];
+      this.setCSRFToken(newCSRFToken);
+      return response;
+    })
     this.setCSRFToken(this.currentCSRFToken);
   }
   static Instance(){
@@ -20,7 +29,6 @@ class APIManager {
   }
   setCSRFToken(csrfToken) {
     this.restClient.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken;
-    console.log(csrfToken);
   }
   async get(path, data) {
     return this.restClient.get(`${API_PREFIX}/${path}?${encodeData(data)}`)

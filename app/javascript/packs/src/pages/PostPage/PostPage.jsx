@@ -12,7 +12,6 @@ import MySadComputer from '../../assets/images/BrokenSad.png';
 
 const PostPage = ({ match }) => {
   const { postId } = match.params;
-  // console.log(match);
   const history = useHistory();
   const goToTagsPage = (tag) => {
     history.push(`/tag/${tag}`);
@@ -39,21 +38,24 @@ const PostPage = ({ match }) => {
       });
   };
 
+  if (match.url === '/post/new' && !isNewPost) setIsNewPost(true);
+
   useEffect(() => {
     if (isNewPost) {
+      setPost({title: '', content: ''});
       setEditing(true);
       setPostReady(true);
     }
     else if(postId)
       fetchPost(postId);
-  }, [postId]);
+  }, [isNewPost, postId]);
 
   const toggleEditing = () => {
     setEditing(!editing);
   };
 
-  const handleTitleChange = (event) => {
-    setPost({...post, title: event.target.value});
+  const handleTitleChange = (title) => {
+    setPost({...post, title});
   };
 
   const handleContentChange = (content) => {
@@ -111,7 +113,7 @@ const PostPage = ({ match }) => {
     <div className={classes.TitleWrap}>
       <input
         className={[classes.Title, classes.EditTitle].join(' ')}
-        onChange={handleTitleChange}
+        onChange={(event) => handleTitleChange(event.target.value)}
         value={post.title}
         placeholder={isNewPost ? "新增標題..." : null}
       >

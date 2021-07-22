@@ -44,7 +44,7 @@ const addCustomHeadings = (trix) => {
       `trix-button--icon-heading-${headingIndex}`
     );
     btn.dataset.trixAttribute = `heading${headingIndex}`;
-    btn.setAttribute("disabled", "");
+    // btn.setAttribute("disabled", "");
     headings.push(btn);
   });
   let blockAttrGroup = trix.toolbarElement.querySelector(

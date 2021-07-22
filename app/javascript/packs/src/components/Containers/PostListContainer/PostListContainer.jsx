@@ -26,6 +26,7 @@ const PostListContainer = (props) => {
       setLoading(false);
     })
     .catch((error)=>{
+      console.error(error);
       setResponseError(error);
       setLoading(false);
     })
