@@ -11,6 +11,9 @@ const Header = () => {
         <li className={classes.SignIn}>
           <Link to="/sign_in">Sign In</Link>
         </li>
+        <li className={classes.SignIn}>
+          <Link to="/post/new">&#x002b; New</Link>
+        </li>
         {/* <li className={classes.SignUp}>
           <Link to="/sign_up">Sign Up</Link>
         </li> */}

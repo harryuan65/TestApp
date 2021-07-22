@@ -12,15 +12,18 @@ import MySadComputer from '../../assets/images/BrokenSad.png';
 
 const PostPage = ({ match }) => {
   const { postId } = match.params;
+  // console.log(match);
   const history = useHistory();
   const goToTagsPage = (tag) => {
     history.push(`/tag/${tag}`);
   };
 
-  const [post, setPost] = useState({});
+  const [post, setPost] = useState({title: '', content: ''});
   const [editing, setEditing] = useState(false);
+  const [isNewPost, setIsNewPost] = useState(match.url === '/post/new');
   const [postReady, setPostReady] = useState(false);
   const [responseError, setResponseError] = useState(null);
+
   const fetchPost = async () => {
     setPostReady(false);
     // await new Promise((resolve) => {setTimeout(resolve, 30000)});
@@ -37,40 +40,53 @@ const PostPage = ({ match }) => {
   };
 
   useEffect(() => {
-    fetchPost(postId);
+    if (isNewPost) {
+      setEditing(true);
+      setPostReady(true);
+    }
+    else if(postId)
+      fetchPost(postId);
   }, [postId]);
 
   const toggleEditing = () => {
     setEditing(!editing);
   };
 
-  const handleContentChange = (content) => {
-    const updatedPost = { ...post };
-    updatedPost.content = content;
-    setPost(updatedPost);
+  const handleTitleChange = (event) => {
+    setPost({...post, title: event.target.value});
   };
 
-  const handleTitleChange = (event) => {
-    const updatedPost = { ...post };
-    updatedPost.title = event.target.value;
-    setPost(updatedPost);
+  const handleContentChange = (content) => {
+    setPost({...post, content});
   };
 
   const savePost = async (event) => {
     event.preventDefault();
     setPostReady(false);
     // await new Promise((resolve) => {setTimeout(resolve, 30000)});
-    APIManager.Instance()
-      .put(`posts/${postId}`, post)
-      .then((response) => {
-        const post = response.data;
-        setPost(post);
-        setPostReady(true);
-        setEditing(false);
-      })
-      .catch((err) => {
-        setResponseError(err);
-      });
+    if (isNewPost) {
+      APIManager.Instance()
+        .post('posts', post)
+        .then((response) => {
+          const post = response.data;
+          history.push(`posts/${post.id}`);
+        })
+        .catch((err) => {
+          setResponseError(err);
+        });
+    } else {
+      APIManager.Instance()
+        .put(`posts/${postId}`, post)
+        .then((response) => {
+          const post = response.data;
+          setPost(post);
+          setPostReady(true);
+          setEditing(false);
+        })
+        .catch((err) => {
+          setResponseError(err);
+        });
+    }
   };
 
   let image = null;
@@ -97,14 +113,15 @@ const PostPage = ({ match }) => {
         className={[classes.Title, classes.EditTitle].join(' ')}
         onChange={handleTitleChange}
         value={post.title}
+        placeholder={isNewPost ? "新增標題..." : null}
       >
       </input>
-      <button className={[classes.btn, classes.warning].join(' ')} onClick={ () => toggleEditing()}>&#x2715; 取消</button>
+      {!isNewPost && <button className={[classes.btn, classes.warning].join(' ')} onClick={ () => toggleEditing()}>&#x2715; 取消</button>}
       </div>
-      <Editor content={post.content} onChange={handleContentChange} />
+      <Editor content={post.content} contentChange={handleContentChange} />
       <button type="submit" onClick={savePost} disabled={!postReady && 'disabled'} className={ !postReady && classes.CircularLoading || '' }>{postReady ? "儲存" : '\u00A0'}</button>
       <div>
-      <p>{post.title}</p>
+      <p>{JSON.stringify(post, null ,2)}</p>
       </div>
     </div>
     </PostContainer>

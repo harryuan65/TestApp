@@ -15,6 +15,7 @@ const App = () => {
           <Switch>
             <Route path="/" exact component={ PostsPage }/>
             <Route path="/tag/:currentTagName" exact component={ PostsPage }/>
+            <Route path="/post/new" exact component={ PostPage }/>
             <Route path="/post/:postId" exact component={ PostPage }/>
             {/* <Route path="/post/:postId/edit" exact component={ PostEditPage }/> */}
           </Switch>

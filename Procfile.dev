@@ -1,2 +1,2 @@
-web: bundle exec rails s -p 3005
+web: bundle exec rails s -p 3010
 webpack: bin/webpack-dev-server

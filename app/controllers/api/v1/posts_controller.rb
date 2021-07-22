@@ -10,6 +10,7 @@ module Api
 
       def create
         @post = PostService.create_post(title: params[:content], content: params[:content])
+        render json: { id: @post.id }
       end
 
       def show
