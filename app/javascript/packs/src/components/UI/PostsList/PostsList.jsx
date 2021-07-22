@@ -8,7 +8,7 @@ const Posts = ({ posts, tagSelectHandler }) => {
       {posts
         ? posts.map((e) => (
             <PostItem
-              key={e.title}
+              key={e.id}
               id={e.id}
               title={e.title}
               author={e.author}

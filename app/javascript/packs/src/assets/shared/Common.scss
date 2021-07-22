@@ -90,3 +90,31 @@ $color-aux: #eee;
   0% { transform: translate(-50%, -50%) rotate(0deg)}
   100%{ transform: translate(-50%, -50%) rotate(360deg) }
 }
+button[type='submit'] {
+  position: relative;
+  float: right;
+  // background-color: #1E212D;
+  font-size: 18px;
+  width: 87px;
+  border: none;
+  outline: none;
+  border-width: 1px;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #ffc300;
+  color: #2b2b2b;
+  font-family: Helvetica;
+  cursor: pointer;
+  &:hover{
+    background-color: #d3a200;
+  }
+  &:disabled{
+    cursor: default;
+  }
+  &:active{
+    border-color: #2b2b2b;
+    background-color: #b18700;
+    color: #ddd;
+  }
+  box-shadow: 0px 3px 4px #ccc;
+}

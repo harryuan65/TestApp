@@ -42,6 +42,7 @@ group :development do
   gem 'listen', '~> 3.3'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem "pry-rails", "~> 0.3.9"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -52,3 +53,5 @@ gem "bcrypt", "~> 3.1"
 gem "jb", "~> 0.8.0"
 
 gem "foreman", "~> 0.87.2"
+
+

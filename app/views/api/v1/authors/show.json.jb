@@ -1,5 +1,6 @@
 {
   id: @author.id,
   name: @author.name,
-  pictureUrl: @author.picture_url
+  pictureUrl: @author.picture_url,
+  loggedIn: true
 }

@@ -8,16 +8,16 @@ import Hoc from "../../components/hoc";
 import classes from "./PostPage.module.scss";
 import Editor from "../../components/Containers/Editor/Editor";
 import TagList from "../../components/UI/TagList/TagList";
-import MySadComputer from '../../assets/images/BrokenSad.png';
+import Error from "../../components/UI/Error/Error";
 
-const PostPage = ({ match }) => {
-  const { postId } = match.params;
+const PostPage = ({ match, author }) => {
+  let { postId } = match.params;
   const history = useHistory();
   const goToTagsPage = (tag) => {
     history.push(`/tag/${tag}`);
   };
 
-  const [post, setPost] = useState({title: '', content: ''});
+  const [post, setPost] = useState({title: '', content: '', author_id: author.id});
   const [editing, setEditing] = useState(false);
   const [isNewPost, setIsNewPost] = useState(match.url === '/post/new');
   const [postReady, setPostReady] = useState(false);
@@ -42,7 +42,7 @@ const PostPage = ({ match }) => {
 
   useEffect(() => {
     if (isNewPost) {
-      setPost({title: '', content: ''});
+      setPost({title: '', content: '', author_id: author.id});
       setEditing(true);
       setPostReady(true);
     }
@@ -71,7 +71,11 @@ const PostPage = ({ match }) => {
         .post('posts', post)
         .then((response) => {
           const post = response.data;
-          history.push(`posts/${post.id}`);
+          setPost(post);
+          setEditing(false);
+          setPostReady(true);
+          postId = post.id;
+          history.push(`${postId}`);
         })
         .catch((err) => {
           setResponseError(err);
@@ -95,14 +99,7 @@ const PostPage = ({ match }) => {
 
   if (responseError) {
     return (
-      <PostContainer>
-        <div className={[classes.PostBlock, classes.WrapResponseError].join(' ')}>
-          <img src={MySadComputer} />
-          <h1 className={classes.Title}>Oops! 好像有東西壞掉了，一定是哈利在玩耍導致的。</h1>
-          <p>{responseError.message}</p>
-          <button className={[classes.btn, classes.primary].join(' ')} onClick={() => history.push('/') }>重新整理</button>
-        </div>
-      </PostContainer>
+      <Error error={responseError}/>
     );
   }
   let editPostContainer = (
@@ -121,10 +118,7 @@ const PostPage = ({ match }) => {
       {!isNewPost && <button className={[classes.btn, classes.warning].join(' ')} onClick={ () => toggleEditing()}>&#x2715; 取消</button>}
       </div>
       <Editor content={post.content} contentChange={handleContentChange} />
-      <button type="submit" onClick={savePost} disabled={!postReady && 'disabled'} className={ !postReady && classes.CircularLoading || '' }>{postReady ? "儲存" : '\u00A0'}</button>
-      <div>
-      <p>{JSON.stringify(post, null ,2)}</p>
-      </div>
+      <button type="submit" onClick={savePost} style={{marginBottom: '20px'}} disabled={!postReady && 'disabled'} className={ !postReady && classes.CircularLoading || '' }>{postReady ? "儲存" : '\u00A0'}</button>
     </div>
     </PostContainer>
   );
@@ -141,9 +135,9 @@ const PostPage = ({ match }) => {
               <div className={classes.LoadingDot} style={{animationDelay: "300ms"}}></div>
             </Hoc>}
           </h1>
-          {postReady && <button className={[classes.btn, classes.primary].join(' ')} onClick={() => toggleEditing()}>&#x270e; 編輯</button>}
+          {postReady && author.loggedIn && <button className={[classes.btn, classes.primary].join(' ')} onClick={() => toggleEditing()}>&#x270e; 編輯</button>}
         </div>
-        {postReady && (
+        {postReady && post.tags && (
           <TagList tags={post.tags} tagSelectHandler={goToTagsPage}/>
         )}
         {/* <PostDesc

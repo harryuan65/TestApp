@@ -12,10 +12,8 @@ const WeeklyBlock = ({ feedTopic }) => {
   const fetchFeedPosts = async (title, url) => {
     setLoading(true);
     // Mock fetching
-    console.log("Sleeping");
     // await new Promise((resolve) => setTimeout(resolve, 864000));
     await new Promise((resolve) => setTimeout(resolve, Math.random() * 800));
-    console.log("Slept 2s");
     let posts = [];
     switch (title) {
       case "ruby":

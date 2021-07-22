@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+}
 .Layout{
   display: grid;
   grid-template-rows: auto minmax(90vh, auto) auto;

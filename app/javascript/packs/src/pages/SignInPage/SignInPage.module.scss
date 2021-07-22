@@ -1,0 +1,63 @@
+.WrapForm{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-column: 1/4;
+  border: 1px solid #c4c4c4;
+  background-color: #fff;
+  border-radius: 8px;
+  width: 60vw;
+  height: 60vh;
+  align-self: center;
+  justify-self: center;
+  box-shadow: 0px 4px 6px #ccc;
+  font-family: Tahoma;
+}
+%FocusTransition {
+  color: #4e4e4e;
+  border-color: #4e4e4e;
+  transition: .4s ease;
+}
+.SignInForm{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.WrapInputPairs {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 30px;
+}
+.InputPair {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  &:not(:first-child) { margin-top: 10px; }
+  label, input{
+    color: #8a8a8a;
+  }
+  label { font-size: 21px; }
+  input {
+    font-size: 19px;
+    padding: 8px 15px;
+  }
+  label.Focused{
+    @extend %FocusTransition;
+  }
+  input{
+    border: 2px solid #8a8a8a;
+    outline: none;
+    border-radius: 5px;
+    &:focus{
+      @extend %FocusTransition;
+    }
+  }
+}
+
+.Title{
+  width: 100%;
+  color: #6e6e6e;
+  text-align: center;
+}

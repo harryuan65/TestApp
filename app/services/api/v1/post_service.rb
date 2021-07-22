@@ -15,8 +15,8 @@ module Api
           Post.includes(:author).find(id)
         end
 
-        def create_post(title: , content:)
-          Post.create!(title: title, content: content)
+        def create_post(title: , content:, author_id:)
+          Post.create!(title: title, content: content, author_id: author_id)
         end
 
         def update_post(id: , title: , content:)
