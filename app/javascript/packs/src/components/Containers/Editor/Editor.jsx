@@ -67,12 +67,8 @@ const Editor = ({ content, contentChange }) => {
   );
 
   const initialize = () => {
-    addCustomTextActions(trixInput.current);
-    addCustomHeadings(trixInput.current);
-    // trixInput.current.addEventListener("trix-initialize", (event) => {
-    //   addCustomTextActions(trixInput.current);
-    //   addCustomHeadings(trixInput.current);
-    // });
+    // addCustomTextActions(trixInput.current);
+    // addCustomHeadings(trixInput.current);
     trixInput.current.addEventListener("trix-change", (event) => {
       setCurrentContent(event.target.innerHTML);
     });
@@ -82,6 +78,7 @@ const Editor = ({ content, contentChange }) => {
   };
 
   const keydownHandler = (event) => {
+    console.log(event.key);
     if (
       [32, 192].includes(event.keyCode) &&
       !!inputQueue[inputQueue.length - 1]

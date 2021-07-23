@@ -1,22 +1,12 @@
+@import '../../../assets/shared/Common.scss';
+
 .trix-wrap {
   margin-top: 30px;
 }
 trix-editor {
   margin-bottom: 30px;
   min-height: 400px;
-  pre{
-    background-color: #ceeaea;
-    padding: 16px;
-    font-size: 14px;
-  }
-  section {
-    background-color: #ddd;
-    margin: 0;
-    padding: 1rem;
-  }
-  h1, h2, h3, h4, h5, h6 {
-    color: #3b3b3b;
-  }
+  @include EditorContent;
 }
 
 trix-toolbar {

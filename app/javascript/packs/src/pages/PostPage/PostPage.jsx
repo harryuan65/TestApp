@@ -73,6 +73,7 @@ const PostPage = ({ match, author }) => {
           const post = response.data;
           setPost(post);
           setEditing(false);
+          setIsNewPost(false);
           setPostReady(true);
           postId = post.id;
           history.push(`${postId}`);
@@ -105,21 +106,30 @@ const PostPage = ({ match, author }) => {
   let editPostContainer = (
     <PostContainer
       // style={{ padding: "30px", marginRight: "0", position: "relative" }}
+      style={ isNewPost || editing ? {gridColumn: '1/4'} : {}}
     >
     <div className={classes.PostBlock}>
-    <div className={classes.TitleWrap}>
-      <input
-        className={[classes.Title, classes.EditTitle].join(' ')}
-        onChange={(event) => handleTitleChange(event.target.value)}
-        value={post.title}
-        placeholder={isNewPost ? "新增標題..." : null}
-      >
-      </input>
-      {!isNewPost && <button className={[classes.btn, classes.warning].join(' ')} onClick={ () => toggleEditing()}>&#x2715; 取消</button>}
+      <div className={classes.TitleWrap}>
+        <textarea
+          type="text"
+          cols="10"
+          row="14"
+          className={[classes.Title, classes.EditTitle].join(' ')}
+          onChange={(event) => {handleTitleChange(event.target.value); }}
+          value={post.title}
+          placeholder={isNewPost ? "新增標題..." : null}
+          style={{
+            width: '100%',
+            overflow: 'scroll',
+            resize: 'none'
+          }}
+        />
+        {!isNewPost && <button className={[classes.btn, classes.warning].join(' ')} onClick={ () => toggleEditing()}>&#x2715; 取消</button>}
       </div>
       <Editor content={post.content} contentChange={handleContentChange} />
       <button type="submit" onClick={savePost} style={{marginBottom: '20px'}} disabled={!postReady && 'disabled'} className={ !postReady && classes.CircularLoading || '' }>{postReady ? "儲存" : '\u00A0'}</button>
     </div>
+    {post.title}
     </PostContainer>
   );
 

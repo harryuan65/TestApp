@@ -10,7 +10,7 @@ import Footer from './components/UI/Footer/Footer';
 import APIManager from './utils/APIManager';
 const App = () => {
   const [author, setAuthor] = useState({});
-  const PrivateRoute = ({component: Component, ...routeProps}) => {
+  const PrivateRoute = ({component: Component, author, ...routeProps}) => {
     console.log(author.loggedIn)
     return <Route {...routeProps} render={ (props) => author.loggedIn ? <Component {...props} author={author}/> : <Redirect to="/sign_in" />} />
   }
@@ -33,7 +33,7 @@ const App = () => {
             <Route path="/" exact component={ PostsPage }/>
             <Route path="/tag/:currentTagName" exact component={ PostsPage }/>
             <Route path="/sign_in" exact render={ (props) => <SignInPage {...props} author={author} setAuthor={setAuthor}/> }/>
-            <PrivateRoute path="/post/new" exact component={ PostPage }/>
+            <Route path="/post/new" exact render={ (props) => author.loggedIn ? <PostPage {...props} author={author}/> : <Redirect to="/sign_in" /> }/>
             <Route path="/post/:postId" exact render={(props) => <PostPage {...props} author={author}/>}/>
           </Switch>
           </Main>
