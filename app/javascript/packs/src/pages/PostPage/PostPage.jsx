@@ -6,9 +6,10 @@ import WeeklyFeedContainer from "../../components/Containers/WeeklyFeedContainer
 import APIManager from "../../utils/APIManager";
 import Hoc from "../../components/hoc";
 import classes from "./PostPage.module.scss";
-import Editor from "../../components/Containers/Editor/Editor";
+// import Editor from "../../components/Containers/Editor/Editor";
 import TagList from "../../components/UI/TagList/TagList";
 import Error from "../../components/UI/Error/Error";
+import RichTextEditor from "../../components/Containers/RichTextEditor/RichTextEditor";
 
 const PostPage = ({ match, author }) => {
   let { postId } = match.params;
@@ -18,7 +19,7 @@ const PostPage = ({ match, author }) => {
   };
 
   const [post, setPost] = useState({title: '', content: '', author_id: author.id});
-  const [editing, setEditing] = useState(false);
+  const [editing, setEditing] = useState(true);
   const [isNewPost, setIsNewPost] = useState(match.url === '/post/new');
   const [postReady, setPostReady] = useState(false);
   const [responseError, setResponseError] = useState(null);
@@ -126,10 +127,11 @@ const PostPage = ({ match, author }) => {
         />
         {!isNewPost && <button className={[classes.btn, classes.warning].join(' ')} onClick={ () => toggleEditing()}>&#x2715; 取消</button>}
       </div>
-      <Editor content={post.content} contentChange={handleContentChange} />
+      {/* <Editor content={post.content} contentChange={handleContentChange} /> */}
+      <RichTextEditor/>
       <button type="submit" onClick={savePost} style={{marginBottom: '20px'}} disabled={!postReady && 'disabled'} className={ !postReady && classes.CircularLoading || '' }>{postReady ? "儲存" : '\u00A0'}</button>
     </div>
-    {post.title}
+    {/* {post.title} */}
     </PostContainer>
   );
 

@@ -8,6 +8,7 @@ import Header from './components/UI/Header/Header';
 import Main from './components/UI/Main/Main';
 import Footer from './components/UI/Footer/Footer';
 import APIManager from './utils/APIManager';
+import RichTextEditor from './components/Containers/RichTextEditor/RichTextEditor';
 const App = () => {
   const [author, setAuthor] = useState({});
   const PrivateRoute = ({component: Component, author, ...routeProps}) => {
@@ -31,6 +32,7 @@ const App = () => {
          <Main>
           <Switch>
             <Route path="/" exact component={ PostsPage }/>
+            <Route path="/test" exact component={RichTextEditor}/>
             <Route path="/tag/:currentTagName" exact component={ PostsPage }/>
             <Route path="/sign_in" exact render={ (props) => <SignInPage {...props} author={author} setAuthor={setAuthor}/> }/>
             <Route path="/post/new" exact render={ (props) => author.loggedIn ? <PostPage {...props} author={author}/> : <Redirect to="/sign_in" /> }/>
